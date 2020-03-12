@@ -10,12 +10,28 @@ const ResourceList = ({resource}) =>{
         setResources(response.data)
     }
 
+    /*
+    si no se pasa el arreglo como segundo parámetro siempre se llama el useEffect
+    [] solo se llama una vez, similar al componentDidmount
+    [resource] siempre se va a llamar si hay algun cambio en resource
+     */
     useEffect(() => {
-        fetchResource(resource);
+       (async resource =>{
+            const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`);
+            setResources(response.data)
+        })(resource)
+        //fetchResource(resource)
     }, [resource]);
     return(
         <div>
-            {resources.length}
+            {resource}
+           <ul>
+               {resources.map(record => (
+                   <li key = {record.id}>
+                       {record.title}
+                   </li>
+               ))}
+           </ul>
         </div>
     )
 }
