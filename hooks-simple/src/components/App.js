@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const App = () =>{
-
+    const [resource, setResource] = useState('posts')
     return (
-        <div className="ui container grid">
-            <div className="ui row">
-                hola a todos desde react
+        <div >
+            <div>
+                <button onClick = {() => setResource('posts')}>Posts</button>
+                <button onClick = {() => setResource('todo')}>Todo</button>
+                {resource}
             </div>
         </div>
 
